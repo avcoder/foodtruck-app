@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌮 Foodtruck</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/papercss@1.9.2/dist/paper.min.css"
+    />
+    <style>
+      tbody td {
+        display: table-cell;
+        align-content: center;
+      }
+
+      .collapsible label {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <nav class="border fixed split-nav">
+          <div class="nav-brand">
+            <h3><a href="#">🌮 Foodtruck</a></h3>
+          </div>
+          <div class="collapsible">
+            <input
+              id="collapsible-nav"
+              type="checkbox"
+              name="collapsible-nav"
+            />
+            <label for="collapsible-nav">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+            </label>
+            <div class="collapsible-body">
+              <ul class="inline">
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Take Orders</a></li>
+                <li><a href="#">Queue</a></li>
+                <li><a href="#">Tickets</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="container" style="margin-top: 100px">
+        <div class="row flex-edges">
+          <input type="text" id="search" placeholder="Search" required />
+          <label class="paper-btn btn-secondary" for="modal-1"
+            >+ Add Order</label
+          >
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Receipt #</th>
+            <th>Name</th>
+            <th>Order</th>
+            <th>Status</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody id="root"></tbody>
+      </table>
+
+      <input class="modal-state" id="modal-1" type="checkbox" />
+      <div class="modal">
+        <label class="modal-bg" for="modal-1"></label>
+        <div class="modal-body">
+          <label class="btn-close" for="modal-1">X</label>
+          <h4 class="modal-title">New Order</h4>
+          <form id="dataForm">
+            <textarea
+              name="customer-order"
+              id="customer-order"
+              rows="5"
+              cols="40"
+              placeholder="Enter Order"
+            ></textarea
+            ><br />
+            <input
+              type="text"
+              name="name-on-order"
+              id="name-on-order"
+              placeholder="Enter name"
+            /><br />
+            <button
+              for="modal-1"
+              type="submit"
+              class="btn-secondary"
+              id="submit-order"
+            >
+              Submit Order
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <input class="modal-state" id="modal-2" type="checkbox" />
+      <div class="modal">
+        <label class="modal-bg" for="modal-2"></label>
+        <div class="modal-body">
+          <label class="btn-close" for="modal-2">X</label>
+          <h4 class="modal-title">Are you sure?</h4>
+          <p class="modal-text">
+            Do you really want to delete #<span id="delete-text">this?</span>
+          </p>
+          <label
+            id="delete-confirmed"
+            for="modal-2"
+            class="paper-btn btn-danger btn-small"
+          >
+            Delete
+          </label>
+        </div>
+      </div>
+
+      <input class="modal-state" id="modal-3" type="checkbox" />
+      <div class="modal">
+        <label class="modal-bg" for="modal-3"></label>
+        <div class="modal-body">
+          <label class="btn-close" for="modal-3">X</label>
+          <h4 class="modal-title">Edit Order</h4>
+          <div class="row flex-edges">
+            <h4 class="text-secondary"># <span id="edit-receipt-id"></span></h4>
+            <div class="form-group">
+              <label for="isReadySwitch" class="paper-switch-tile">
+                <input id="is-ready" name="isReadySwitch" type="checkbox" />
+                <div class="paper-switch-tile-card border">
+                  <div
+                    class="paper-switch-tile-card-front border background-warning"
+                  >
+                    Cooking
+                  </div>
+                  <div
+                    class="paper-switch-tile-card-back border background-success"
+                  >
+                    Ready
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <form id="dataForm">
+            <textarea
+              name="customer-order-2"
+              id="customer-order-2"
+              rows="5"
+              cols="40"
+              placeholder="Enter Order"
+            ></textarea
+            ><br />
+            <input
+              type="text"
+              name="name-on-order-2"
+              id="name-on-order-2"
+              placeholder="Enter name"
+            />
+
+            <br />
+            <button
+              for="modal-3"
+              type="submit"
+              class="btn-secondary"
+              id="update-order"
+            >
+              Update Order
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="index.js" type="module"></script>
+  </body>
+</html>
