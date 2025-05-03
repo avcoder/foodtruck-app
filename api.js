@@ -1,11 +1,13 @@
 const api = {
   getData: async () => {
     const token = localStorage.getItem("token");
-    const res = await fetch("http://localhost:3000/api/order", {
+    // FILL-IN-THE-BLANK 5
+    const res = await fetch(__________________, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        // FILL-IN-THE-BLANK 6
+        Authorization: _____________,
       },
     });
     const data = await res.json();
@@ -67,8 +69,10 @@ const api = {
   },
 
   createUser: async ({ username, password }) => {
-    const res = await fetch("http://localhost:3000/user", {
-      method: "POST",
+    // FILL-IN-THE-BLANK 1
+    const res = await fetch(________________, {
+      // FILL-IN-THE-BLANK 2
+      method: _____,
       headers: {
         "Content-Type": "application/json",
       },
@@ -84,8 +88,10 @@ const api = {
   },
 
   loginUser: async ({ username, password }) => {
-    const res = await fetch("http://localhost:3000/login", {
-      method: "POST",
+    // FILL-IN-THE-BLANK 3
+    const res = await fetch(____________, {
+      // FILL-IN-THE-BLANK 4
+      method: _______,
       headers: {
         "Content-Type": "application/json",
       },
