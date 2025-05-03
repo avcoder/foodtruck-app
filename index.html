@@ -3,10 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🌮 Foodtruck</title>
+    <title>Foodtruck</title>
     <link
       rel="stylesheet"
       href="https://unpkg.com/papercss@1.9.2/dist/paper.min.css"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌮</text></svg>"
     />
     <style>
       tbody td {
@@ -52,7 +56,12 @@
           </div>
         </nav>
       </div>
+
       <div class="container" style="margin-top: 100px">
+        <aside id="alert"></aside>
+      </div>
+
+      <div class="container">
         <div class="row flex-edges">
           <input type="text" id="search" placeholder="Search" required />
           <label class="paper-btn btn-secondary" for="modal-1"

@@ -1,4 +1,4 @@
-// import api from "./api.js";
+import api from "./api.js";
 
 const root = document.querySelector("#root");
 const deleteConfirmed = document.querySelector("#delete-confirmed");
@@ -12,12 +12,10 @@ const customerOrder2 = document.querySelector("#customer-order-2");
 const nameOnOrder = document.querySelector("#name-on-order");
 const nameOnOrder2 = document.querySelector("#name-on-order-2");
 const search = document.querySelector("#search");
+const alertBox = document.querySelector("#alert");
 
-const tempData = [
-  { id: 1, name: "al", order: ["1 pop", "1 taco"], isReady: false },
-];
-
-function render(data = tempData) {
+function render(data = []) {
+  console.log("in render, data: ", data);
   root.innerHTML = data
     .map(
       (order) => `
@@ -68,4 +66,60 @@ function render(data = tempData) {
     .join("");
 }
 
-render();
+async function reRender() {
+  const data = await api.getData();
+
+  render(data);
+}
+
+root.addEventListener("click", async (e) => {
+  const { op, id } = e.target.dataset;
+  if (op === "delete") {
+    deleteText.textContent = `${id}`;
+  } else if (op === "edit") {
+    // make a call to findOne then populate edit form with results
+    // console.log("id: ", id);
+    const { receiptId, order, name, isReady } = await api.getOrderById(id);
+    editReceiptId.textContent = receiptId;
+    // isReadySwitch.checked = isReady;
+    nameOnOrder2.value = name;
+    customerOrder2.value = order.join("\n");
+  }
+});
+
+deleteConfirmed.addEventListener("click", async (e) => {
+  await api.deleteByReceiptNo(deleteText.textContent);
+  e.preventDefault();
+  reRender();
+});
+
+submitOrder.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const order = customerOrder.value.split("\n");
+  const name = nameOnOrder.value;
+  await api.createOrder({ name, order });
+  window.location.reload();
+});
+
+updateOrder.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const order = customerOrder2.value.split("\n");
+  const name = nameOnOrder2.value;
+  const ready = isReadySwitch.checked;
+  const receiptId = editReceiptId.textContent;
+  console.log("> ", receiptId, name, ready, order);
+  await api.updateOrder({ id: receiptId, order, name, isReady: ready });
+  window.location.reload();
+});
+
+search.addEventListener("keyup", (e) => {
+  console.log(e.target.value);
+});
+
+reRender();
+
+alertDismissed.addEventListener("click", () => {
+  const alertDismissed = document.querySelector("#alert-dismissed");
+  alert("hi");
+  localStorage.removeItem("alert");
+});
